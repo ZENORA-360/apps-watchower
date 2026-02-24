@@ -1,0 +1,39 @@
+services:
+  watchtower:
+    image: containrrr/watchtower:1.7.1
+    container_name: zenora-watchtower
+    restart: unless-stopped
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+    command: >
+      --interval 1800
+      --cleanup
+      --label-enable
+      --rolling-restart
+      --notifications-level info
+
+    environment:
+      - DOCKER_API_VERSION=1.53
+      - WATCHTOWER_INCLUDE_STOPPED=false
+      - WATCHTOWER_REVIVE_STOPPED=false
+      - WATCHTOWER_NO_STARTUP_MESSAGE=true
+
+      # Email via Zoho
+      - WATCHTOWER_NOTIFICATIONS=email
+      - WATCHTOWER_NOTIFICATION_EMAIL_FROM=${SMTP_USER}
+      - WATCHTOWER_NOTIFICATION_EMAIL_TO=${ALERT_TO}
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER=smtp.zoho.com
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PORT=587
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_USER=${SMTP_USER}
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PASSWORD=${SMTP_PASS}
+      - WATCHTOWER_NOTIFICATION_EMAIL_DELAY=2
+      - WATCHTOWER_NOTIFICATION_EMAIL_SUBJECTTAG=[WATCHTOWER-ZENORA]
+
+    networks:
+      - internal-tools
+
+networks:
+  internal-tools:
+    external: true
