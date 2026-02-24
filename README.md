@@ -19,3 +19,7 @@ Watchtower supports multiple notification channels—such as email, Slack, Micro
 
 ## Intended use and limitations
 The maintainers recommend Watchtower primarily for non-production environments, like personal servers, home media setups, or test clusters. For enterprise-grade orchestration and update control, alternatives such as Kubernetes, MicroK8s, or k3s are advised due to their greater resilience and fine-grained scheduling capabilities.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+<img width="1332" height="264" alt="image" src="https://github.com/user-attachments/assets/bcc31978-3b48-4780-98df-b4155ce510d8" />
